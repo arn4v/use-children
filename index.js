@@ -1,1 +1,30 @@
-function e(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var t=e(require("react")),u=function(e,u){return[t.default.useMemo(function(){return t.default.Children.map(e,function(e){return t.default.isValidElement(e)&&e.type===u?e:null})},[e,u]),t.default.useMemo(function(){return t.default.Children.map(e,function(e){return t.default.isValidElement(e)&&e.type===u?null:e})},[e,u])]};exports.default=u,exports.useChildren=u;
+import React from "react";
+
+const useChildren = (children, target) => {
+  const withTarget = React.useMemo(
+    () =>
+      React.Children.map(children, (item) => {
+        if (React.isValidElement(item) && item.type === target) {
+          return item;
+        }
+        return null;
+      }),
+    [children, target]
+  );
+  const withoutTarget = React.useMemo(
+    () =>
+      React.Children.map(children, (item) => {
+        if (!React.isValidElement(item) || item.type !== target) {
+          return item;
+        }
+
+        return null;
+      }),
+    [children, target]
+  );
+
+  return [withTarget, withoutTarget];
+};
+
+export { useChildren };
+export default useChildren;

@@ -1,0 +1,30 @@
+{
+  "name": "use-children",
+  "version": "0.0.1",
+  "description": "Filter React children for specific component",
+  "main": "index.js",
+  "repository": "https://github.com/arn4v/use-children",
+  "scripts": {
+    "prepublish": "yarn build",
+    "build": "microbundle --compress --no-sourcemap --external react --jsx React.createElement -o dist",
+    "test": "jest"
+  },
+  "author": "Arnav Gosain <arnav@arnavgosain.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@testing-library/dom": "^8.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.1.9",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "microbundle": "^0.13.3",
+    "react-test-renderer": "^17.0.2"
+  }
+}

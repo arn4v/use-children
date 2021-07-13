@@ -1,44 +1,38 @@
-import React, { useState } from "react";
-import "./App.css";
-import logo from "./logo.svg";
+import * as React from "react";
+import useChildren from "use-children";
+
+const Hello = ({ name }: { name: string }) => {
+  return (
+    <>
+      Hello {name}
+      <br />
+    </>
+  );
+};
+
+/**
+ *
+ * Should only render Hello components
+ */
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  const [withTarget, withoutTarget] = useChildren(children, Hello);
+
+  return <>{withTarget}</>;
+};
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <>
+      <Wrapper>
+        <Hello name="Glen" />
+        <Hello name="Archer" />
+        <Hello name="Neal" />
+        <Hello name="Luke" />
+        <div>Hello x</div>
+        <div>Hello y</div>
+        <div>Hello z</div>
+      </Wrapper>
+    </>
   );
 }
 

@@ -8,7 +8,7 @@
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "use-children": "^0.0.1"
+    "use-children": "../"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

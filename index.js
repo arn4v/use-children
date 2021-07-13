@@ -1,29 +1,19 @@
 import React from "react";
 
 const useChildren = (children, target) => {
-  const withTarget = React.useMemo(
-    () =>
-      React.Children.map(children, (item) => {
-        if (React.isValidElement(item) && item.type === target) {
-          return item;
-        }
+  return React.useMemo(() => {
+    const withTarget = [];
+    const withoutTarget = React.Children.map(children, (item) => {
+      if (React.isValidElement(item) && item.type === target) {
+        withTarget.push(item);
         return null;
-      }),
-    [children, target]
-  );
-  const withoutTarget = React.useMemo(
-    () =>
-      React.Children.map(children, (item) => {
-        if (!React.isValidElement(item) || item.type !== target) {
-          return item;
-        }
+      }
 
-        return null;
-      }),
-    [children, target]
-  );
+      return item;
+    });
 
-  return [withTarget, withoutTarget];
+    return [withTarget, withoutTarget];
+  }, [children, target]);
 };
 
 export { useChildren };

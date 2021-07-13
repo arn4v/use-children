@@ -2,6 +2,54 @@
 
 Filter React children for specific component
 
+## Install
+
+**NPM**:
+
+```shell
+npm install --save use-children
+```
+
+**Yarn**:
+
+```shell
+yarn add use-children
+```
+
+## Usage
+
+Read the [Why?](#why) section for a more detailed explanation.
+
+```jsx
+import useChildren from "useChildren";
+
+const ModalContent = () => {
+  return <>{/** Some JSX */}</>;
+};
+
+const ModalOverlay = () => {
+  return <>{/** Some JSX */}</>;
+};
+
+const ModalRoot = ({ children, isOpen }) => {
+  // withOverlay is an array of all ModalOverlay components
+  const [withOverlay] = useChildren(children, ModalOverlay);
+  // withContent is an array of all MdalContent components
+  const [withContent] = useChildren(children, ModalContent);
+
+  return (
+    <div className="modal-root">
+      {isOpen ? (
+        <>
+          {withOverlay}
+          {withContent}
+        </>
+      ) : null}
+    </div>
+  );
+};
+```
+
 ## Why?
 
 Imagine you're building a Modal component which consists of three components:
@@ -53,48 +101,6 @@ const MyModal = () => {
 
 With `use-children` you can filter for just `ModalContent` and `ModalOverlay`
 
-## Install:
+## Credits
 
-**NPM**:
-
-```shell
-npm install --save use-children
-```
-
-**Yarn**:
-
-```shell
-yarn add -D use-children
-```
-
-## Usage:
-
-```jsx
-import useChildren from "useChildren";
-
-const ModalContent = () => {
-  return <>{/** Some JSX */}</>;
-};
-
-const ModalOverlay = () => {
-  return <>{/** Some JSX */}</>;
-};
-
-const ModalRoot = ({ children, isOpen }) => {
-  // withOverlay is an array of all ModalOverlay components
-  const [withOverlay] = useChildren(children, ModalOverlay);
-  // withContent is an array of all MdalContent components
-  const [withContent] = useChildren(children, ModalContent);
-
-  return (
-    <div className="modal-root">
-      {isOpen ? (
-        <>
-          {withOverlay}
-          {withContent}
-        </>
-      ) : null}
-    </div>
-  );
-};
-```
+- [Geist-UI](https://github.com/geist-org/react) for the [pickChild](https://github.com/geist-org/react/blob/master/components/utils/collections.ts#L24) function
